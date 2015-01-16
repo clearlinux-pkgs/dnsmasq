@@ -1,0 +1,58 @@
+From 75f518046b15838e9c3065bdd1ba1e2563b1c255 Mon Sep 17 00:00:00 2001
+From: "Munoz, Obed N" <obed.n.munoz@intel.com>
+Date: Fri, 7 Aug 2015 11:57:52 -0500
+Subject: [PATCH] stateless
+
+Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
+---
+ src/config.h |  8 ++++++++
+ src/option.c | 14 +++++++++++++-
+ 2 files changed, 21 insertions(+), 1 deletion(-)
+
+diff --git a/src/config.h b/src/config.h
+index f75fe9d..7e4619d 100644
+--- a/src/config.h
++++ b/src/config.h
+@@ -206,6 +206,14 @@ RESOLVFILE
+ #   endif
+ #endif
+ 
++#ifndef DEFAULT_CONFFILE
++#   if defined(__FreeBSD__)
++#      define DEFAULT_CONFFILE "/usr/local/share/defaults/dnsmasq/dnsmasq.conf"
++#   else
++#      define DEFAULT_CONFFILE "/usr/share/defaults/dnsmasq/dnsmasq.conf"
++#   endif
++#endif
++
+ #ifndef RUNFILE
+ #   if defined(__ANDROID__)
+ #      define RUNFILE "/data/dnsmasq.pid"
+diff --git a/src/option.c b/src/option.c
+index ecc2619..18066e8 100644
+--- a/src/option.c
++++ b/src/option.c
+@@ -4487,7 +4487,19 @@ void read_opts(int argc, char **argv, char *compile_opts)
+ 
+   if (conffile)
+     {
+-      one_file(conffile, conffile_opt);
++#ifdef DEFAULT_CONFFILE
++      struct stat st = {0};
++      if (stat(CONFFILE, &st) != 0)
++	{
++	  one_file(DEFAULT_CONFFILE, conffile_opt);
++	}
++      else
++	{
++	  one_file(CONFFILE, conffile_opt);
++	}
++#else
++      one_file(CONFFILE, conffile_opt);
++#endif
+       if (conffile_opt == 0)
+ 	free(conffile);
+     }
+-- 
+2.5.0
+
