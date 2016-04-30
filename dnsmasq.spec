@@ -4,7 +4,7 @@
 #
 Name     : dnsmasq
 Version  : 2.75
-Release  : 24
+Release  : 25
 URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.75.tar.xz
 Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.75.tar.xz
 Source1  : dnsmasq.service
