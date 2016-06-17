@@ -1,9 +1,9 @@
-From 75f518046b15838e9c3065bdd1ba1e2563b1c255 Mon Sep 17 00:00:00 2001
-From: "Munoz, Obed N" <obed.n.munoz@intel.com>
-Date: Fri, 7 Aug 2015 11:57:52 -0500
-Subject: [PATCH] stateless
+From 5f7b39f991779280f7b898d42bef1fb714a0219f Mon Sep 17 00:00:00 2001
+From: Ikey Doherty <michael.i.doherty@intel.com>
+Date: Wed, 17 Jun 2015 13:48:16 +0100
+Subject: [PATCH] Convert to stateless configuration
 
-Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
+Signed-off-by: Ikey Doherty <michael.i.doherty@intel.com>
 ---
  src/config.h |  8 ++++++++
  src/option.c | 14 +++++++++++++-
@@ -29,30 +29,30 @@ index f75fe9d..7e4619d 100644
  #   if defined(__ANDROID__)
  #      define RUNFILE "/data/dnsmasq.pid"
 diff --git a/src/option.c b/src/option.c
-index ecc2619..18066e8 100644
+index f99c3f5..e9ced79 100644
 --- a/src/option.c
 +++ b/src/option.c
-@@ -4487,7 +4487,19 @@ void read_opts(int argc, char **argv, char *compile_opts)
- 
-   if (conffile)
+@@ -4492,7 +4492,19 @@ void read_opts(int argc, char **argv, char *compile_opts)
+     }
+   else
      {
--      one_file(conffile, conffile_opt);
+-      one_file(CONFFILE, conffile_opt);
 +#ifdef DEFAULT_CONFFILE
 +      struct stat st = {0};
 +      if (stat(CONFFILE, &st) != 0)
-+	{
-+	  one_file(DEFAULT_CONFFILE, conffile_opt);
-+	}
++        {
++          one_file(DEFAULT_CONFFILE, conffile_opt);
++        }
 +      else
-+	{
-+	  one_file(CONFFILE, conffile_opt);
-+	}
++       {
++          one_file(CONFFILE, conffile_opt);
++       }
 +#else
-+      one_file(CONFFILE, conffile_opt);
++          one_file(CONFFILE, conffile_opt);
 +#endif
-       if (conffile_opt == 0)
- 	free(conffile);
      }
+ 
+   /* port might not be known when the address is parsed - fill in here */
 -- 
-2.5.0
+1.9.1
 
