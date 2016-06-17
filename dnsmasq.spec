@@ -4,7 +4,7 @@
 #
 Name     : dnsmasq
 Version  : 2.73
-Release  : 26
+Release  : 27
 URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.73.tar.xz
 Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.73.tar.xz
 Source1  : dnsmasq.service
@@ -19,6 +19,7 @@ Patch1: stateless.patch
 Patch2: cve-2015-3294.nopatch
 Patch3: noping.patch
 Patch4: nov6.patch
+Patch5: build.patch
 
 %description
 Dnsmasq is lightweight, easy to configure DNS forwarder and DHCP server. It 
@@ -68,6 +69,7 @@ doc components for the dnsmasq package.
 %patch1 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 make V=1  %{?_smp_mflags} ; make -C contrib/wrt %{?_smp_mflags}

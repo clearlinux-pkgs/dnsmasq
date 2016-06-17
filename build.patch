@@ -1,0 +1,11 @@
+--- dnsmasq-2.73/Makefile~	2015-06-12 20:39:11.000000000 +0000
++++ dnsmasq-2.73/Makefile	2016-06-17 18:30:34.334167339 +0000
+@@ -24,7 +24,7 @@
+ LOCALEDIR     = $(PREFIX)/share/locale
+ BUILDDIR      = $(SRC)
+ DESTDIR       = 
+-CFLAGS        = -Wall -W -O2
++CFLAGS        := -Wall -W -O2
+ LDFLAGS       = 
+ COPTS         = 
+ RPM_OPT_FLAGS = 
