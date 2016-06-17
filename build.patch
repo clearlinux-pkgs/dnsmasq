@@ -5,7 +5,7 @@
  BUILDDIR      = $(SRC)
  DESTDIR       = 
 -CFLAGS        = -Wall -W -O2
-+CFLAGS        := -Wall -W -O2
++CFLAGS        += -Wall -W 
  LDFLAGS       = 
  COPTS         = 
  RPM_OPT_FLAGS = 

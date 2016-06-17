@@ -4,7 +4,7 @@
 #
 Name     : dnsmasq
 Version  : 2.73
-Release  : 27
+Release  : 28
 URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.73.tar.xz
 Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.73.tar.xz
 Source1  : dnsmasq.service
