@@ -4,7 +4,7 @@
 #
 Name     : dnsmasq
 Version  : 2.73
-Release  : 28
+Release  : 29
 URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.73.tar.xz
 Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.73.tar.xz
 Source1  : dnsmasq.service
@@ -72,6 +72,7 @@ doc components for the dnsmasq package.
 %patch5 -p1
 
 %build
+export LANG=C
 make V=1  %{?_smp_mflags} ; make -C contrib/wrt %{?_smp_mflags}
 
 %install
