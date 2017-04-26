@@ -1,1 +1,0 @@
-; make -C contrib/wrt %{?_smp_mflags}

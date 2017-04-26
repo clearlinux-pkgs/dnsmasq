@@ -2,8 +2,3 @@ install -d %{buildroot}%{_bindir}
 install -d %{buildroot}%{_mandir}/man1
 install -d %{buildroot}%{_libdir}/systemd/system/
 install -D dnsmasq.conf.example %{buildroot}%{_datadir}/defaults/dnsmasq/dnsmasq.conf
-ls contrib/wrt/
-install -m 755 contrib/wrt/dhcp_release $RPM_BUILD_ROOT%{_bindir}/dhcp_release
-install -m 644 contrib/wrt/dhcp_release.1 $RPM_BUILD_ROOT%{_mandir}/man1/dhcp_release.1
-install -m 755 contrib/wrt/dhcp_lease_time $RPM_BUILD_ROOT%{_bindir}/dhcp_lease_time
-install -m 644 contrib/wrt/dhcp_lease_time.1 $RPM_BUILD_ROOT%{_mandir}/man1/dhcp_lease_time.1

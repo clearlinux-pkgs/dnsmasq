@@ -1,7 +1,7 @@
-From a5860f8571f4f026badda2c1befdb24040b86fc0 Mon Sep 17 00:00:00 2001
+From 8043ef026efb2535e22d782a8f885385abfdf03b Mon Sep 17 00:00:00 2001
 From: "Munoz, Obed N" <obed.n.munoz@intel.com>
 Date: Fri, 7 Aug 2015 12:01:21 -0500
-Subject: [PATCH] nov6
+Subject: [PATCH 3/3] nov6
 
 Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
 ---
@@ -9,10 +9,10 @@ Signed-off-by: Munoz, Obed N <obed.n.munoz@intel.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/src/config.h b/src/config.h
-index 7e4619d..0f3b088 100644
+index fd967e8..b348d3d 100644
 --- a/src/config.h
 +++ b/src/config.h
-@@ -155,7 +155,7 @@ RESOLVFILE
+@@ -156,7 +156,7 @@ RESOLVFILE
     has no library dependencies other than libc */
  
  #define HAVE_DHCP
@@ -22,5 +22,5 @@ index 7e4619d..0f3b088 100644
  #define HAVE_SCRIPT
  #define HAVE_AUTH
 -- 
-2.5.0
+2.12.2
 
