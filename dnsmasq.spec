@@ -6,7 +6,7 @@
 #
 Name     : dnsmasq
 Version  : 2.76
-Release  : 31
+Release  : 32
 URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.76.tar.xz
 Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.76.tar.xz
 Source1  : dnsmasq.service
