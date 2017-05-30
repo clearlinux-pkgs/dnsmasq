@@ -4,6 +4,7 @@ After=network.target
 Requires=network.target
 
 [Service]
+Restart=on-failure
 ExecStart=/usr/sbin/dnsmasq -k
 
 [Install]
