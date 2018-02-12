@@ -3,3 +3,4 @@ cve-2015-3294.nopatch
 #noping.patch
 nov6.patch
 build.patch
+cve-2017-15107.patch

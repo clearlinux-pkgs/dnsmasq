@@ -6,7 +6,7 @@
 #
 Name     : dnsmasq
 Version  : 2.78
-Release  : 35
+Release  : 36
 URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.78.tar.xz
 Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.78.tar.xz
 Source1  : dnsmasq.service
@@ -22,6 +22,7 @@ Patch1: stateless.patch
 Patch2: cve-2015-3294.nopatch
 Patch3: nov6.patch
 Patch4: build.patch
+Patch5: cve-2017-15107.patch
 
 %description
 Dnsmasq is lightweight, easy to configure DNS forwarder and DHCP server. It 
@@ -71,21 +72,22 @@ doc components for the dnsmasq package.
 %patch1 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1506952889
+export SOURCE_DATE_EPOCH=1518476883
 export CFLAGS="$CFLAGS -fstack-protector-strong "
 export FCFLAGS="$CFLAGS -fstack-protector-strong "
 export FFLAGS="$CFLAGS -fstack-protector-strong "
 export CXXFLAGS="$CXXFLAGS -fstack-protector-strong "
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1506952889
+export SOURCE_DATE_EPOCH=1518476883
 rm -rf %{buildroot}
 %make_install PREFIX=%{_prefix}
 mkdir -p %{buildroot}/usr/lib/systemd/system
