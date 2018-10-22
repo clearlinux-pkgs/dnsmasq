@@ -6,7 +6,7 @@
 #
 Name     : dnsmasq
 Version  : 2.80
-Release  : 40
+Release  : 41
 URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz
 Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz
 Source1  : dnsmasq.service
@@ -21,8 +21,7 @@ Requires: dnsmasq-license = %{version}-%{release}
 Requires: dnsmasq-man = %{version}-%{release}
 Patch1: stateless.patch
 Patch2: cve-2015-3294.nopatch
-Patch3: nov6.patch
-Patch4: build.patch
+Patch3: build.patch
 
 %description
 Dnsmasq is lightweight, easy to configure DNS forwarder and DHCP server. It 
@@ -81,14 +80,13 @@ man components for the dnsmasq package.
 %setup -q -n dnsmasq-2.80
 %patch1 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1539933347
+export SOURCE_DATE_EPOCH=1540229754
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -96,7 +94,7 @@ export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=use
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1539933347
+export SOURCE_DATE_EPOCH=1540229754
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
 cp COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/COPYING
