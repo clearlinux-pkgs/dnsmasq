@@ -6,7 +6,7 @@
 #
 Name     : dnsmasq
 Version  : 2.80
-Release  : 41
+Release  : 43
 URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz
 Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz
 Source1  : dnsmasq.service
@@ -15,13 +15,14 @@ Summary  : A lightweight caching nameserver
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
 Requires: dnsmasq-bin = %{version}-%{release}
-Requires: dnsmasq-config = %{version}-%{release}
 Requires: dnsmasq-data = %{version}-%{release}
 Requires: dnsmasq-license = %{version}-%{release}
 Requires: dnsmasq-man = %{version}-%{release}
+Requires: dnsmasq-services = %{version}-%{release}
 Patch1: stateless.patch
 Patch2: cve-2015-3294.nopatch
 Patch3: build.patch
+Patch4: contrib.patch
 
 %description
 Dnsmasq is lightweight, easy to configure DNS forwarder and DHCP server. It 
@@ -36,20 +37,12 @@ leases and BOOTP for network booting of diskless machines.
 Summary: bin components for the dnsmasq package.
 Group: Binaries
 Requires: dnsmasq-data = %{version}-%{release}
-Requires: dnsmasq-config = %{version}-%{release}
 Requires: dnsmasq-license = %{version}-%{release}
 Requires: dnsmasq-man = %{version}-%{release}
+Requires: dnsmasq-services = %{version}-%{release}
 
 %description bin
 bin components for the dnsmasq package.
-
-
-%package config
-Summary: config components for the dnsmasq package.
-Group: Default
-
-%description config
-config components for the dnsmasq package.
 
 
 %package data
@@ -76,25 +69,35 @@ Group: Default
 man components for the dnsmasq package.
 
 
+%package services
+Summary: services components for the dnsmasq package.
+Group: Systemd services
+
+%description services
+services components for the dnsmasq package.
+
+
 %prep
 %setup -q -n dnsmasq-2.80
 %patch1 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1540229754
+export SOURCE_DATE_EPOCH=1544003003
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 make  %{?_smp_mflags}
 
+
 %install
-export SOURCE_DATE_EPOCH=1540229754
+export SOURCE_DATE_EPOCH=1544003003
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
 cp COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/COPYING
@@ -107,6 +110,9 @@ install -d %{buildroot}%{_bindir}
 install -d %{buildroot}%{_mandir}/man1
 install -d %{buildroot}%{_libdir}/systemd/system/
 install -D dnsmasq.conf.example %{buildroot}%{_datadir}/defaults/dnsmasq/dnsmasq.conf
+pushd contrib/lease-tools
+%make_install
+popd
 ## install_append end
 
 %files
@@ -114,11 +120,10 @@ install -D dnsmasq.conf.example %{buildroot}%{_datadir}/defaults/dnsmasq/dnsmasq
 
 %files bin
 %defattr(-,root,root,-)
+/usr/bin/dhcp_lease_time
+/usr/bin/dhcp_release
+/usr/bin/dhcp_release6
 /usr/bin/dnsmasq
-
-%files config
-%defattr(-,root,root,-)
-/usr/lib/systemd/system/dnsmasq.service
 
 %files data
 %defattr(-,root,root,-)
@@ -132,3 +137,7 @@ install -D dnsmasq.conf.example %{buildroot}%{_datadir}/defaults/dnsmasq/dnsmasq
 %files man
 %defattr(0644,root,root,0755)
 /usr/share/man/man8/dnsmasq.8
+
+%files services
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/dnsmasq.service
