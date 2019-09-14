@@ -6,7 +6,7 @@
 #
 Name     : dnsmasq
 Version  : 2.80
-Release  : 45
+Release  : 46
 URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz
 Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz
 Source1  : dnsmasq.service
