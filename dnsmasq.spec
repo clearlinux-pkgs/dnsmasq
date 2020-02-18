@@ -6,7 +6,7 @@
 #
 Name     : dnsmasq
 Version  : 2.80
-Release  : 47
+Release  : 48
 URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz
 Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz
 Source1  : dnsmasq.service
@@ -24,6 +24,7 @@ Patch2: cve-2015-3294.nopatch
 Patch3: build.patch
 Patch4: contrib.patch
 Patch5: CVE-2019-14834.patch
+Patch6: 0001-Fix-build-after-y2038-changes-in-glib.patch
 
 %description
 Dnsmasq is lightweight, easy to configure DNS forwarder and DHCP server. It 
@@ -84,13 +85,14 @@ cd %{_builddir}/dnsmasq-2.80
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1578437145
+export SOURCE_DATE_EPOCH=1582055212
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -103,7 +105,7 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1578437145
+export SOURCE_DATE_EPOCH=1582055212
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
 cp %{_builddir}/dnsmasq-2.80/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/74a8a6531a42e124df07ab5599aad63870fa0bd4
