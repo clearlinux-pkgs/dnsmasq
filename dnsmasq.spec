@@ -6,11 +6,11 @@
 #
 Name     : dnsmasq
 Version  : 2.80
-Release  : 48
-URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz
-Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz
+Release  : 49
+URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz
+Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz
 Source1  : dnsmasq.service
-Source2  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz.asc
+Source2  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.80.tar.xz.asc
 Summary  : A lightweight caching nameserver
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
@@ -92,20 +92,20 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1582055212
+export SOURCE_DATE_EPOCH=1590684059
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1582055212
+export SOURCE_DATE_EPOCH=1590684059
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
 cp %{_builddir}/dnsmasq-2.80/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/74a8a6531a42e124df07ab5599aad63870fa0bd4
