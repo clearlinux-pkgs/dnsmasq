@@ -1,6 +1,3 @@
 stateless.patch
-cve-2015-3294.nopatch
 build.patch
 contrib.patch
-CVE-2019-14834.patch
-0001-Fix-build-after-y2038-changes-in-glib.patch

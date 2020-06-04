@@ -13,10 +13,10 @@ Signed-off-by: Icarus Sparry <icarus.w.sparry@intel.com>
  2 files changed, 15 insertions(+)
 
 diff --git a/src/config.h b/src/config.h
-index 80a50e1..fd967e8 100644
+index 7d08f7d086d1..8d382ba61ada 100644
 --- a/src/config.h
 +++ b/src/config.h
-@@ -207,6 +207,14 @@ RESOLVFILE
+@@ -218,6 +218,14 @@ RESOLVFILE
  #   endif
  #endif
  
@@ -32,13 +32,13 @@ index 80a50e1..fd967e8 100644
  #   if defined(__ANDROID__)
  #      define RUNFILE "/data/dnsmasq.pid"
 diff --git a/src/option.c b/src/option.c
-index d8c57d6..b143945 100644
+index 1f698daf0452..28c10b5cab74 100644
 --- a/src/option.c
 +++ b/src/option.c
-@@ -4487,6 +4487,13 @@ void read_opts(int argc, char **argv, char *compile_opts)
+@@ -4986,6 +4986,13 @@ void read_opts(int argc, char **argv, char *compile_opts)
    char *buff = opt_malloc(MAXDNAME);
-   int option, conffile_opt = '7', testmode = 0;
-   char *arg, *conffile = CONFFILE;
+   int option, testmode = 0;
+   char *arg, *conffile = NULL;
 +#ifdef DEFAULT_CONFFILE
 +  struct stat st = {0};
 +  if (stat(CONFFILE, &st) != 0)
