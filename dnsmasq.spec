@@ -6,7 +6,7 @@
 #
 Name     : dnsmasq
 Version  : 2.81
-Release  : 50
+Release  : 51
 URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.81.tar.xz
 Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.81.tar.xz
 Source1  : dnsmasq.service
@@ -87,7 +87,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1591312439
+export SOURCE_DATE_EPOCH=1591399289
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -100,7 +100,7 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1591312439
+export SOURCE_DATE_EPOCH=1591399289
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
 cp %{_builddir}/dnsmasq-2.81/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/74a8a6531a42e124df07ab5599aad63870fa0bd4
