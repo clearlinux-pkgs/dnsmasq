@@ -6,7 +6,7 @@
 #
 Name     : dnsmasq
 Version  : 2.82
-Release  : 52
+Release  : 53
 URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.82.tar.xz
 Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.82.tar.xz
 Source1  : dnsmasq.service
@@ -19,6 +19,7 @@ Requires: dnsmasq-data = %{version}-%{release}
 Requires: dnsmasq-license = %{version}-%{release}
 Requires: dnsmasq-man = %{version}-%{release}
 Requires: dnsmasq-services = %{version}-%{release}
+BuildRequires : gmp-dev
 BuildRequires : nettle-dev
 BuildRequires : pkgconfig(hogweed)
 BuildRequires : pkgconfig(nettle)
@@ -90,7 +91,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1595259124
+export SOURCE_DATE_EPOCH=1595259336
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -103,7 +104,7 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1595259124
+export SOURCE_DATE_EPOCH=1595259336
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
 cp %{_builddir}/dnsmasq-2.82/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/74a8a6531a42e124df07ab5599aad63870fa0bd4
