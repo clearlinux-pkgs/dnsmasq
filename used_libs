@@ -1,1 +1,7 @@
 libc.so.6
+libdbus-1.so.3
+libgmp.so.10
+libhogweed.so.6
+libidn2.so.0
+libnetfilter_conntrack.so.3
+libnettle.so.8

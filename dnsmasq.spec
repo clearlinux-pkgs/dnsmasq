@@ -6,7 +6,7 @@
 #
 Name     : dnsmasq
 Version  : 2.82
-Release  : 56
+Release  : 57
 URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.82.tar.xz
 Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.82.tar.xz
 Source1  : dnsmasq.service
@@ -31,6 +31,7 @@ BuildRequires : pkgconfig(nettle)
 Patch1: stateless.patch
 Patch2: build.patch
 Patch3: contrib.patch
+Patch4: options.patch
 
 %description
 Dnsmasq is lightweight, easy to configure DNS forwarder and DHCP server. It 
@@ -90,13 +91,14 @@ cd %{_builddir}/dnsmasq-2.82
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1595260141
+export SOURCE_DATE_EPOCH=1595260332
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -109,7 +111,7 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1595260141
+export SOURCE_DATE_EPOCH=1595260332
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
 cp %{_builddir}/dnsmasq-2.82/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/74a8a6531a42e124df07ab5599aad63870fa0bd4
