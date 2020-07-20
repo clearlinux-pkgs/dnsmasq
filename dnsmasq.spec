@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x15CDDA6AE19135A2 (srk@debian.org)
 #
 Name     : dnsmasq
-Version  : 2.81
-Release  : 51
-URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.81.tar.xz
-Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.81.tar.xz
+Version  : 2.82
+Release  : 52
+URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.82.tar.xz
+Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.82.tar.xz
 Source1  : dnsmasq.service
-Source2  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.81.tar.xz.asc
+Source2  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.82.tar.xz.asc
 Summary  : A lightweight caching nameserver
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
@@ -19,6 +19,9 @@ Requires: dnsmasq-data = %{version}-%{release}
 Requires: dnsmasq-license = %{version}-%{release}
 Requires: dnsmasq-man = %{version}-%{release}
 Requires: dnsmasq-services = %{version}-%{release}
+BuildRequires : nettle-dev
+BuildRequires : pkgconfig(hogweed)
+BuildRequires : pkgconfig(nettle)
 Patch1: stateless.patch
 Patch2: build.patch
 Patch3: contrib.patch
@@ -76,8 +79,8 @@ services components for the dnsmasq package.
 
 
 %prep
-%setup -q -n dnsmasq-2.81
-cd %{_builddir}/dnsmasq-2.81
+%setup -q -n dnsmasq-2.82
+cd %{_builddir}/dnsmasq-2.82
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -87,7 +90,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1591399289
+export SOURCE_DATE_EPOCH=1595259124
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -100,11 +103,11 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1591399289
+export SOURCE_DATE_EPOCH=1595259124
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
-cp %{_builddir}/dnsmasq-2.81/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/74a8a6531a42e124df07ab5599aad63870fa0bd4
-cp %{_builddir}/dnsmasq-2.81/COPYING-v3 %{buildroot}/usr/share/package-licenses/dnsmasq/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/dnsmasq-2.82/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/74a8a6531a42e124df07ab5599aad63870fa0bd4
+cp %{_builddir}/dnsmasq-2.82/COPYING-v3 %{buildroot}/usr/share/package-licenses/dnsmasq/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 %make_install PREFIX=%{_prefix}
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/dnsmasq.service
