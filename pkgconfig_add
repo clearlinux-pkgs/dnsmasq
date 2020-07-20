@@ -2,3 +2,6 @@
 # not get picked up automatically. One name per line, no whitespace.
 hogweed
 nettle
+libidn2
+libnetfilter_conntrack
+dbus-1
