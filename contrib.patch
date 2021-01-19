@@ -1,6 +1,8 @@
---- dnsmasq-2.80/contrib/lease-tools/Makefile~	2018-10-18 18:21:55.000000000 +0000
-+++ dnsmasq-2.80/contrib/lease-tools/Makefile	2018-12-05 09:40:00.656814452 +0000
-@@ -4,3 +4,8 @@
+diff --git a/contrib/lease-tools/Makefile b/contrib/lease-tools/Makefile
+index f38f2ed..fd62a94 100644
+--- a/contrib/lease-tools/Makefile
++++ b/contrib/lease-tools/Makefile
+@@ -4,3 +4,8 @@ all: dhcp_release dhcp_release6 dhcp_lease_time
  
  clean:
  	rm -f *~ *.o core dhcp_release dhcp_release6 dhcp_lease_time
@@ -9,4 +11,3 @@
 +install: dhcp_release dhcp_release6 dhcp_lease_time
 +	mkdir -p $(DESTDIR)/usr/bin
 +	cp -a dhcp_release dhcp_release6 dhcp_lease_time $(DESTDIR)/usr/bin
-\ No newline at end of file
