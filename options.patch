@@ -1,5 +1,5 @@
 diff --git a/src/config.h b/src/config.h
-index 9994692..a2a96e5 100644
+index 12c2815..fab36db 100644
 --- a/src/config.h
 +++ b/src/config.h
 @@ -186,12 +186,12 @@ RESOLVFILE
@@ -13,7 +13,7 @@ index 9994692..a2a96e5 100644
 -/* #define HAVE_CONNTRACK */
 +#define HAVE_LIBIDN2
 +#define HAVE_CONNTRACK
- /* #define HAVE_NETTLEHASH */
+ /* #define HAVE_CRYPTOHASH */
 -/* #define HAVE_DNSSEC */
 +#define HAVE_DNSSEC
  

@@ -1,5 +1,5 @@
 diff --git a/Makefile b/Makefile
-index 7d2afd1..d0e2434 100644
+index e4c3f5c..8bff6b0 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -24,7 +24,7 @@ MANDIR        = $(PREFIX)/share/man

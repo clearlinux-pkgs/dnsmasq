@@ -1,7 +1,7 @@
-From 54393a22b887dafd67bf344437ab3d204b9b2214 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Icarus Sparry <icarus.w.sparry@intel.com>
 Date: Tue, 25 Apr 2017 16:42:38 -0700
-Subject: [PATCH 1/2] Convert to stateless configuration
+Subject: [PATCH] Convert to stateless configuration
 
 At runtime if CONFFILE (/etc/dnsmask.conf) doesn't exist then try
 /usr/share/defaults/dnsmasq/dnsmasq.conf instead.
@@ -13,10 +13,10 @@ Signed-off-by: Icarus Sparry <icarus.w.sparry@intel.com>
  2 files changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/src/config.h b/src/config.h
-index 7d08f7d086d1..8d382ba61ada 100644
+index 9f69ce3..12c2815 100644
 --- a/src/config.h
 +++ b/src/config.h
-@@ -218,6 +218,14 @@ RESOLVFILE
+@@ -224,6 +224,14 @@ RESOLVFILE
  #   endif
  #endif
  
@@ -32,10 +32,10 @@ index 7d08f7d086d1..8d382ba61ada 100644
  #   if defined(__ANDROID__)
  #      define RUNFILE "/data/dnsmasq.pid"
 diff --git a/src/option.c b/src/option.c
-index 1f698daf0452..1b565048ebcf 100644
+index 0a72406..9eddbea 100644
 --- a/src/option.c
 +++ b/src/option.c
-@@ -5121,8 +5121,10 @@ void read_opts(int argc, char **argv, char *compile_opts)
+@@ -5143,8 +5143,10 @@ void read_opts(int argc, char **argv, char *compile_opts)
        one_file(conffile, 0);
        free(conffile);
      }
@@ -47,6 +47,3 @@ index 1f698daf0452..1b565048ebcf 100644
  
    /* port might not be known when the address is parsed - fill in here */
    if (daemon->servers)
--- 
-2.27.0
-
