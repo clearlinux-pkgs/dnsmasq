@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x15CDDA6AE19135A2 (srk@debian.org)
 #
 Name     : dnsmasq
-Version  : 2.85
-Release  : 61
-URL      : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.85.tar.xz
-Source0  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.85.tar.xz
+Version  : 2.86
+Release  : 62
+URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.86.tar.xz
+Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.86.tar.xz
 Source1  : dnsmasq.service
-Source2  : http://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.85.tar.xz.asc
+Source2  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.86.tar.xz.asc
 Summary  : A lightweight caching nameserver
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
@@ -86,8 +86,8 @@ services components for the dnsmasq package.
 
 
 %prep
-%setup -q -n dnsmasq-2.85
-cd %{_builddir}/dnsmasq-2.85
+%setup -q -n dnsmasq-2.86
+cd %{_builddir}/dnsmasq-2.86
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -98,24 +98,24 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1617903028
+export SOURCE_DATE_EPOCH=1631149695
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
 make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1617903028
+export SOURCE_DATE_EPOCH=1631149695
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
-cp %{_builddir}/dnsmasq-2.85/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/74a8a6531a42e124df07ab5599aad63870fa0bd4
-cp %{_builddir}/dnsmasq-2.85/COPYING-v3 %{buildroot}/usr/share/package-licenses/dnsmasq/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/dnsmasq-2.86/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/74a8a6531a42e124df07ab5599aad63870fa0bd4
+cp %{_builddir}/dnsmasq-2.86/COPYING-v3 %{buildroot}/usr/share/package-licenses/dnsmasq/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 %make_install PREFIX=%{_prefix}
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/dnsmasq.service
