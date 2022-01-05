@@ -6,7 +6,7 @@
 #
 Name     : dnsmasq
 Version  : 2.86
-Release  : 62
+Release  : 63
 URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.86.tar.xz
 Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.86.tar.xz
 Source1  : dnsmasq.service
@@ -17,6 +17,7 @@ License  : GPL-2.0 GPL-3.0
 Requires: dnsmasq-bin = %{version}-%{release}
 Requires: dnsmasq-data = %{version}-%{release}
 Requires: dnsmasq-license = %{version}-%{release}
+Requires: dnsmasq-locales = %{version}-%{release}
 Requires: dnsmasq-man = %{version}-%{release}
 Requires: dnsmasq-services = %{version}-%{release}
 BuildRequires : buildreq-nginx
@@ -69,6 +70,14 @@ Group: Default
 license components for the dnsmasq package.
 
 
+%package locales
+Summary: locales components for the dnsmasq package.
+Group: Default
+
+%description locales
+locales components for the dnsmasq package.
+
+
 %package man
 Summary: man components for the dnsmasq package.
 Group: Default
@@ -98,7 +107,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1631149695
+export SOURCE_DATE_EPOCH=1641406863
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -107,16 +116,17 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong
 export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
-make  %{?_smp_mflags}
+make  %{?_smp_mflags}  all-i18n
 
 
 %install
-export SOURCE_DATE_EPOCH=1631149695
+export SOURCE_DATE_EPOCH=1641406863
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
 cp %{_builddir}/dnsmasq-2.86/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/74a8a6531a42e124df07ab5599aad63870fa0bd4
 cp %{_builddir}/dnsmasq-2.86/COPYING-v3 %{buildroot}/usr/share/package-licenses/dnsmasq/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-%make_install PREFIX=%{_prefix}
+%make_install PREFIX=%{_prefix} install-i18n
+%find_lang dnsmasq
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/dnsmasq.service
 ## install_append content
@@ -150,8 +160,14 @@ popd
 
 %files man
 %defattr(0644,root,root,0755)
+/usr/share/man/es/man8/dnsmasq.8
+/usr/share/man/fr/man8/dnsmasq.8
 /usr/share/man/man8/dnsmasq.8
 
 %files services
 %defattr(-,root,root,-)
 /usr/lib/systemd/system/dnsmasq.service
+
+%files locales -f dnsmasq.lang
+%defattr(-,root,root,-)
+

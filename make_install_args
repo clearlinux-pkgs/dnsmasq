@@ -1,1 +1,1 @@
-PREFIX=%{_prefix}
+PREFIX=%{_prefix} install-i18n
