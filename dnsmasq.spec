@@ -5,13 +5,13 @@
 # Source0 file verified with key 0x15CDDA6AE19135A2 (srk@debian.org)
 #
 Name     : dnsmasq
-Version  : 2.86
-Release  : 63
-URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.86.tar.xz
-Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.86.tar.xz
+Version  : 2.87
+Release  : 64
+URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.87.tar.xz
+Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.87.tar.xz
 Source1  : dnsmasq.service
-Source2  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.86.tar.xz.asc
-Summary  : A lightweight caching nameserver
+Source2  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.87.tar.xz.asc
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
 Requires: dnsmasq-bin = %{version}-%{release}
@@ -35,13 +35,10 @@ Patch3: contrib.patch
 Patch4: options.patch
 
 %description
-Dnsmasq is lightweight, easy to configure DNS forwarder and DHCP server. It 
-is designed to provide DNS and, optionally, DHCP, to a small network. It can
-serve the names of local machines which are not in the global DNS. The DHCP 
-server integrates with the DNS server and allows machines with DHCP-allocated
-addresses to appear in the DNS with names configured either in each host or 
-in a central configuration file. Dnsmasq supports static and dynamic DHCP 
-leases and BOOTP for network booting of diskless machines.
+Dnsmasq logo, contributed by Justin Clift.
+The source format is Inkscape SVG vector format, which is scalable and
+easy to export to other formats. For convenience I've included a 56x31
+png export and a 16x16 ico suitable for use as a web favicon.
 
 %package bin
 Summary: bin components for the dnsmasq package.
@@ -95,8 +92,8 @@ services components for the dnsmasq package.
 
 
 %prep
-%setup -q -n dnsmasq-2.86
-cd %{_builddir}/dnsmasq-2.86
+%setup -q -n dnsmasq-2.87
+cd %{_builddir}/dnsmasq-2.87
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -107,7 +104,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641406863
+export SOURCE_DATE_EPOCH=1664233869
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -120,11 +117,11 @@ make  %{?_smp_mflags}  all-i18n
 
 
 %install
-export SOURCE_DATE_EPOCH=1641406863
+export SOURCE_DATE_EPOCH=1664233869
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
-cp %{_builddir}/dnsmasq-2.86/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/74a8a6531a42e124df07ab5599aad63870fa0bd4
-cp %{_builddir}/dnsmasq-2.86/COPYING-v3 %{buildroot}/usr/share/package-licenses/dnsmasq/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/dnsmasq-%{version}/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/4cc77b90af91e615a64ae04893fdffa7939db84c
+cp %{_builddir}/dnsmasq-%{version}/COPYING-v3 %{buildroot}/usr/share/package-licenses/dnsmasq/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 %make_install PREFIX=%{_prefix} install-i18n
 %find_lang dnsmasq
 mkdir -p %{buildroot}/usr/lib/systemd/system
@@ -155,7 +152,7 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/dnsmasq/74a8a6531a42e124df07ab5599aad63870fa0bd4
+/usr/share/package-licenses/dnsmasq/4cc77b90af91e615a64ae04893fdffa7939db84c
 /usr/share/package-licenses/dnsmasq/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 
 %files man

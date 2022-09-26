@@ -41,9 +41,9 @@ index 0a72406..9eddbea 100644
      }
 -  else
 +  else if (access(CONFFILE, F_OK) != -1)
-     one_file(CONFFILE, '7');
+     one_file(CONFFILE, LOPT_CONF_OPT);
 +  else
-+    one_file(DEFAULT_CONFFILE, '7');
++    one_file(DEFAULT_CONFFILE, LOPT_CONF_OPT);
  
    /* port might not be known when the address is parsed - fill in here */
    if (daemon->servers)

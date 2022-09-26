@@ -16,6 +16,6 @@ index 12c2815..fab36db 100644
  /* #define HAVE_CRYPTOHASH */
 -/* #define HAVE_DNSSEC */
 +#define HAVE_DNSSEC
- 
+ /* #define HAVE_NFTSET */
  
  /* Default locations for important system files. */
