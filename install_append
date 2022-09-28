@@ -1,7 +1,7 @@
-install -d %{buildroot}%{_bindir}
-install -d %{buildroot}%{_mandir}/man1
-install -d %{buildroot}%{_libdir}/systemd/system/
-install -D dnsmasq.conf.example %{buildroot}%{_datadir}/defaults/dnsmasq/dnsmasq.conf
+install -d %{buildroot}/usr/bin
+install -d %{buildroot}/usr/share/man/man1
+install -d %{buildroot}/usr/lib/systemd/system/
+install -D dnsmasq.conf.example %{buildroot}/usr/share/defaults/dnsmasq/dnsmasq.conf
 pushd contrib/lease-tools
 %make_install
 popd

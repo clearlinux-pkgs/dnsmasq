@@ -6,7 +6,7 @@
 #
 Name     : dnsmasq
 Version  : 2.87
-Release  : 64
+Release  : 65
 URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.87.tar.xz
 Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.87.tar.xz
 Source1  : dnsmasq.service
@@ -104,7 +104,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1664233869
+export SOURCE_DATE_EPOCH=1664323353
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -117,7 +117,7 @@ make  %{?_smp_mflags}  all-i18n
 
 
 %install
-export SOURCE_DATE_EPOCH=1664233869
+export SOURCE_DATE_EPOCH=1664323353
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
 cp %{_builddir}/dnsmasq-%{version}/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/4cc77b90af91e615a64ae04893fdffa7939db84c
@@ -127,10 +127,10 @@ cp %{_builddir}/dnsmasq-%{version}/COPYING-v3 %{buildroot}/usr/share/package-lic
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/dnsmasq.service
 ## install_append content
-install -d %{buildroot}%{_bindir}
-install -d %{buildroot}%{_mandir}/man1
-install -d %{buildroot}%{_libdir}/systemd/system/
-install -D dnsmasq.conf.example %{buildroot}%{_datadir}/defaults/dnsmasq/dnsmasq.conf
+install -d %{buildroot}/usr/bin
+install -d %{buildroot}/usr/share/man/man1
+install -d %{buildroot}/usr/lib/systemd/system/
+install -D dnsmasq.conf.example %{buildroot}/usr/share/defaults/dnsmasq/dnsmasq.conf
 pushd contrib/lease-tools
 %make_install
 popd
