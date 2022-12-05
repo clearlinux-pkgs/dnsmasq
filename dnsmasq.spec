@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x15CDDA6AE19135A2 (srk@debian.org)
 #
 Name     : dnsmasq
-Version  : 2.87
-Release  : 65
-URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.87.tar.xz
-Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.87.tar.xz
+Version  : 2.88
+Release  : 66
+URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.88.tar.xz
+Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.88.tar.xz
 Source1  : dnsmasq.service
-Source2  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.87.tar.xz.asc
+Source2  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.88.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
@@ -92,8 +92,8 @@ services components for the dnsmasq package.
 
 
 %prep
-%setup -q -n dnsmasq-2.87
-cd %{_builddir}/dnsmasq-2.87
+%setup -q -n dnsmasq-2.88
+cd %{_builddir}/dnsmasq-2.88
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -104,7 +104,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1664323353
+export SOURCE_DATE_EPOCH=1670263457
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -117,7 +117,7 @@ make  %{?_smp_mflags}  all-i18n
 
 
 %install
-export SOURCE_DATE_EPOCH=1664323353
+export SOURCE_DATE_EPOCH=1670263457
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
 cp %{_builddir}/dnsmasq-%{version}/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/4cc77b90af91e615a64ae04893fdffa7939db84c
