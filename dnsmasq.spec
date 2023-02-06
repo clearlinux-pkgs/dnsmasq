@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x15CDDA6AE19135A2 (srk@debian.org)
 #
 Name     : dnsmasq
-Version  : 2.88
-Release  : 66
-URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.88.tar.xz
-Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.88.tar.xz
+Version  : 2.89
+Release  : 67
+URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.89.tar.xz
+Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.89.tar.xz
 Source1  : dnsmasq.service
-Source2  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.88.tar.xz.asc
+Source2  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.89.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0 GPL-3.0
@@ -29,6 +29,9 @@ BuildRequires : pkgconfig(hogweed)
 BuildRequires : pkgconfig(libidn2)
 BuildRequires : pkgconfig(libnetfilter_conntrack)
 BuildRequires : pkgconfig(nettle)
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 Patch1: stateless.patch
 Patch2: build.patch
 Patch3: contrib.patch
@@ -92,8 +95,8 @@ services components for the dnsmasq package.
 
 
 %prep
-%setup -q -n dnsmasq-2.88
-cd %{_builddir}/dnsmasq-2.88
+%setup -q -n dnsmasq-2.89
+cd %{_builddir}/dnsmasq-2.89
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -104,24 +107,24 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1670263457
+export SOURCE_DATE_EPOCH=1675712360
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
 make  %{?_smp_mflags}  all-i18n
 
 
 %install
-export SOURCE_DATE_EPOCH=1670263457
+export SOURCE_DATE_EPOCH=1675712360
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
-cp %{_builddir}/dnsmasq-%{version}/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/4cc77b90af91e615a64ae04893fdffa7939db84c
-cp %{_builddir}/dnsmasq-%{version}/COPYING-v3 %{buildroot}/usr/share/package-licenses/dnsmasq/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/dnsmasq-%{version}/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/4cc77b90af91e615a64ae04893fdffa7939db84c || :
+cp %{_builddir}/dnsmasq-%{version}/COPYING-v3 %{buildroot}/usr/share/package-licenses/dnsmasq/8624bcdae55baeef00cd11d5dfcfa60f68710a02 || :
 %make_install PREFIX=%{_prefix} install-i18n
 %find_lang dnsmasq
 mkdir -p %{buildroot}/usr/lib/systemd/system
