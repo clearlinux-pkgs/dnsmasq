@@ -3,7 +3,7 @@ From: Icarus Sparry <icarus.w.sparry@intel.com>
 Date: Tue, 25 Apr 2017 16:42:38 -0700
 Subject: [PATCH] Convert to stateless configuration
 
-At runtime if CONFFILE (/etc/dnsmask.conf) doesn't exist then try
+At runtime if CONFFILE (/etc/dnsmasq.conf) doesn't exist then try
 /usr/share/defaults/dnsmasq/dnsmasq.conf instead.
 
 Signed-off-by: Icarus Sparry <icarus.w.sparry@intel.com>

@@ -2,3 +2,4 @@ stateless.patch
 build.patch
 contrib.patch
 options.patch
+0001-Store-leases-in-var-lib-dnsmasq.patch

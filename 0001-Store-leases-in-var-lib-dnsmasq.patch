@@ -1,0 +1,177 @@
+From 697912d5d15b8f152af3e4a738294d6dce4c62f9 Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Thu, 4 May 2023 13:11:01 -0700
+Subject: [PATCH] Store leases in /var/lib/dnsmasq
+
+Create a user, _dnsmasq, to own the directory and as whom dnsmasq will
+run.
+---
+ contrib/dnslist/dnslist.pl |  2 +-
+ dnsmasq.conf.example       |  2 +-
+ man/dnsmasq.8              | 10 ++++------
+ man/es/dnsmasq.8           | 10 ++++------
+ man/fr/dnsmasq.8           | 10 ++++------
+ src/config.h               |  6 ++++--
+ 6 files changed, 18 insertions(+), 22 deletions(-)
+
+diff --git a/contrib/dnslist/dnslist.pl b/contrib/dnslist/dnslist.pl
+index 7ce2720b560f..a43b95482745 100755
+--- a/contrib/dnslist/dnslist.pl
++++ b/contrib/dnslist/dnslist.pl
+@@ -44,7 +44,7 @@ use Template;
+ 
+ # Location of state file.  (This is the dnsmasq default.)
+ # Change with -s <file>
+-my $dnsmasq_state_file = '/var/lib/misc/dnsmasq.leases';
++my $dnsmasq_state_file = '/var/lib/dnsmasq/dnsmasq.leases';
+ # Location of template.  (Assumed to be in current directory.)
+ # Change with -t <file>
+ my $html_template_file = 'dnslist.tt2';
+diff --git a/dnsmasq.conf.example b/dnsmasq.conf.example
+index 0cbf572eb9d5..0778aafe3e0b 100644
+--- a/dnsmasq.conf.example
++++ b/dnsmasq.conf.example
+@@ -545,7 +545,7 @@
+ # The DHCP server needs somewhere on disk to keep its lease database.
+ # This defaults to a sane location, but if you want to change it, use
+ # the line below.
+-#dhcp-leasefile=/var/lib/misc/dnsmasq.leases
++#dhcp-leasefile=/var/lib/dnsmasq/dnsmasq.leases
+ 
+ # Set the DHCP server to authoritative mode. In this mode it will barge in
+ # and take over the lease for any client which broadcasts on the network,
+diff --git a/man/dnsmasq.8 b/man/dnsmasq.8
+index 3d1d96a7adc2..791e850184cb 100644
+--- a/man/dnsmasq.8
++++ b/man/dnsmasq.8
+@@ -166,7 +166,7 @@ Specify an alternate path for dnsmasq to record its process-id in. Normally /var
+ .TP
+ .B \-u, --user=<username>
+ Specify the userid to which dnsmasq will change after startup. Dnsmasq must normally be started as root, but it will drop root 
+-privileges after startup by changing id to another user. Normally this user is "nobody" but that 
++privileges after startup by changing id to another user. Normally this user is "_dnsmasq" but that 
+ can be over-ridden with this switch.
+ .TP
+ .B \-g, --group=<groupname> 
+@@ -2681,9 +2681,9 @@ dnsmasq has no direct way of determining the charset in use, and must
+ assume that it is the system default. 
+  
+ .SH FILES
+-.IR /etc/dnsmasq.conf 
++.IR /etc/dnsmasq.conf
+ 
+-.IR /usr/local/etc/dnsmasq.conf
++.IR /usr/share/defaults/dnsmasq/dnsmasq.conf
+ 
+ .IR /etc/resolv.conf
+ .IR /var/run/dnsmasq/resolv.conf
+@@ -2694,9 +2694,7 @@ assume that it is the system default.
+ 
+ .IR /etc/ethers
+ 
+-.IR /var/lib/misc/dnsmasq.leases 
+-
+-.IR /var/db/dnsmasq.leases
++.IR /var/lib/dnsmasq/dnsmasq.leases
+ 
+ .IR /var/run/dnsmasq.pid
+ .SH SEE ALSO
+diff --git a/man/es/dnsmasq.8 b/man/es/dnsmasq.8
+index 4a70a4f74d6c..339f4d885ab8 100644
+--- a/man/es/dnsmasq.8
++++ b/man/es/dnsmasq.8
+@@ -123,7 +123,7 @@ Normalmente es /var/run/dnsmasq.pid.
+ Especificar el userid al cual dnsmasq debe cambiarse despues de iniciar.
+ Dnsmasq normalmente debe ser iniciado como root, pero soltar� los
+ privilegios root despues del inicio, cambiando a otro usuario.
+-Normalmente este usuario es "nobody", pero eso se puede cambiar
++Normalmente este usuario es "_dnsmasq", pero eso se puede cambiar
+ con esta opci�n.
+ .TP
+ .B \-g, --group=<grupo> 
+@@ -1498,9 +1498,9 @@ determinar el juego de caracteres en uso, y debe asumir que es el predeterminado
+ del sistema.
+ 
+ .SH ARCHIVOS
+-.IR /etc/dnsmasq.conf 
++.IR /etc/dnsmasq.conf
+ 
+-.IR /usr/local/etc/dnsmasq.conf
++.IR /usr/share/defaults/dnsmasq/dnsmasq.conf
+ 
+ .IR /etc/resolv.conf
+ 
+@@ -1508,9 +1508,7 @@ del sistema.
+ 
+ .IR /etc/ethers
+ 
+-.IR /var/lib/misc/dnsmasq.leases 
+-
+-.IR /var/db/dnsmasq.leases
++.IR /var/lib/dnsmasq/dnsmasq.leases
+ 
+ .IR /var/run/dnsmasq.pid
+ .SH VER TAMBIEN
+diff --git a/man/fr/dnsmasq.8 b/man/fr/dnsmasq.8
+index dc2fdc024478..19f3e14bd09d 100644
+--- a/man/fr/dnsmasq.8
++++ b/man/fr/dnsmasq.8
+@@ -164,7 +164,7 @@ par défaut est /var/run/dnsmasq.pid.
+ Spécifie l'identité (nom d'utilisateur) prise par Dnsmasq après le démarrage.
+ Dnsmasq doit normalement être démarré en temps que root ("super-utilisateur"),
+ mais abandonne ses privilèges après le démarrage en changeant d'identité.
+-Normalement cet utilisateur est l'utilisateur nobody ("personne"), mais il est
++Normalement cet utilisateur est l'utilisateur _dnsmasq ("personne"), mais il est
+ possible d'en définir un autre par le biais de ce paramètre.
+ .TP
+ .B \-g, --group=<nom de groupe> 
+@@ -2345,9 +2345,9 @@ moyen de déterminer directement la valeur de jeu de caractère utilisé,
+ et assume de ce fait qu'il s'agit de la valeur par défaut du système.
+ 
+ .SH FICHIERS
+-.IR /etc/dnsmasq.conf 
++.IR /etc/dnsmasq.conf
+ 
+-.IR /usr/local/etc/dnsmasq.conf
++.IR /usr/share/defaults/dnsmasq/dnsmasq.conf
+ .IR /var/run/dnsmasq/resolv.conf
+ .IR /etc/ppp/resolv.conf
+ .IR /etc/dhcpc/resolv.conf
+@@ -2358,9 +2358,7 @@ et assume de ce fait qu'il s'agit de la valeur par défaut du système.
+ 
+ .IR /etc/ethers
+ 
+-.IR /var/lib/misc/dnsmasq.leases 
+-
+-.IR /var/db/dnsmasq.leases
++.IR /var/lib/dnsmasq/dnsmasq.leases
+ 
+ .IR /var/run/dnsmasq.pid
+ .SH VOIR AUSSI
+diff --git a/src/config.h b/src/config.h
+index 602e9178e3d7..07106205b64c 100644
+--- a/src/config.h
++++ b/src/config.h
+@@ -45,8 +45,8 @@
+ #define ETHERSFILE "/etc/ethers"
+ #define DEFLEASE 3600 /* default DHCPv4 lease time, one hour */
+ #define DEFLEASE6 (3600*24) /* default lease time for DHCPv6. One day. */
+-#define CHUSER "nobody"
+-#define CHGRP "dip"
++#define CHUSER "_dnsmasq"
++#define CHGRP "_dnsmasq"
+ #define TFTP_MAX_CONNECTIONS 50 /* max simultaneous connections */
+ #define LOG_MAX 5 /* log-queue length */
+ #define RANDFILE "/dev/urandom"
+@@ -61,6 +61,8 @@
+ #define LOOP_TEST_TYPE T_TXT
+ #define DEFAULT_FAST_RETRY 1000 /* ms, default delay before fast retry */
+ #define STALE_CACHE_EXPIRY 86400 /* 1 day in secs, default maximum expiry time for stale cache data */
++
++#define LEASEFILE "/var/lib/dnsmasq/dnsmasq.leases"
+  
+ /* compile-time options: uncomment below to enable or do eg.
+    make COPTS=-DHAVE_BROKEN_RTC
+-- 
+2.40.1
+
