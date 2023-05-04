@@ -7,11 +7,11 @@
 #
 Name     : dnsmasq
 Version  : 2.89
-Release  : 68
+Release  : 69
 URL      : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.89.tar.xz
 Source0  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.89.tar.xz
 Source1  : dnsmasq.service
-Source2  : dnsmasq.sysusers
+Source2  : dnsmasq.tmpfiles
 Source3  : https://www.thekelleys.org.uk/dnsmasq/dnsmasq-2.89.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
@@ -122,7 +122,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683232140
+export SOURCE_DATE_EPOCH=1683238115
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -135,7 +135,7 @@ make  %{?_smp_mflags}  all-i18n
 
 
 %install
-export SOURCE_DATE_EPOCH=1683232140
+export SOURCE_DATE_EPOCH=1683238115
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/dnsmasq
 cp %{_builddir}/dnsmasq-%{version}/COPYING %{buildroot}/usr/share/package-licenses/dnsmasq/4cc77b90af91e615a64ae04893fdffa7939db84c || :
@@ -144,8 +144,8 @@ cp %{_builddir}/dnsmasq-%{version}/COPYING-v3 %{buildroot}/usr/share/package-lic
 %find_lang dnsmasq
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/dnsmasq.service
-mkdir -p %{buildroot}/usr/lib/sysusers.d
-install -m 0644 %{SOURCE2} %{buildroot}/usr/lib/sysusers.d/dnsmasq.conf
+mkdir -p %{buildroot}/usr/lib/tmpfiles.d
+install -m 0644 %{SOURCE2} %{buildroot}/usr/lib/tmpfiles.d/dnsmasq.conf
 ## install_append content
 install -d %{buildroot}/usr/bin
 install -d %{buildroot}/usr/share/man/man1
@@ -168,7 +168,7 @@ popd
 
 %files config
 %defattr(-,root,root,-)
-/usr/lib/sysusers.d/dnsmasq.conf
+/usr/lib/tmpfiles.d/dnsmasq.conf
 
 %files data
 %defattr(-,root,root,-)

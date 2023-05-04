@@ -5,8 +5,6 @@ Requires=network.target
 
 [Service]
 Restart=on-failure
-ExecStartPre=/usr/bin/mkdir -m 755 -p /var/lib/dnsmasq
-ExecStartPre=/usr/bin/chown _dnsmasq:_dnsmasq /var/lib/dnsmasq
 ExecStart=/usr/sbin/dnsmasq -k
 
 [Install]
