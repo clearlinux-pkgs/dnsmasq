@@ -2,5 +2,4 @@
 # picked up automatically. One name per line, no whitespace.
 nettle-dev
 gmp-dev
-buildreq-nginx
 gnupg
